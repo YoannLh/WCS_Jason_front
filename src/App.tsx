@@ -1,4 +1,5 @@
 import { Header } from './components/Header/Header'
+import { Main } from './components/Main/Main'
 import { Footer } from './components/Footer/Footer'
 
 import styled from 'styled-components'
@@ -12,6 +13,7 @@ export function App() {
   return (
     <Container>
       <Header />
+      <Main />
       <Footer />
     </Container>
   )

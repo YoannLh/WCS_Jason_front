@@ -5,7 +5,7 @@ const Container = styled.footer`
   bottom: 0;
   display: flex;
   width: 100%;
-  height: 150px;
+  height: 10vh;
   background: #f76c6c;
   color: white;
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Container = styled.header`
   display: flex;
   width: 100%;
-  height: 150px;
+  height: 20vh;
   background: #f4f4f4;
 `
 
