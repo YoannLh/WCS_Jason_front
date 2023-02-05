@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ModalLoader } from '../ModalLoader/ModalLoader'
@@ -31,62 +31,25 @@ const Name = styled.p`
   margin: 5px auto;
 `
 
-const names = [
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-  'coucou',
-  'salut',
-  'hello',
-  'ola',
-  'loulou',
-  'pouet',
-  'lalala',
-]
+interface ResultsProps {
+  data: string[] | undefined
+}
 
-export const Results = () => {
+export const Results = ({ data }: ResultsProps) => {
   const [isModalLoaderVisible, setIsModalLoaderVisible] = useState(true)
+  const [names, setNames] = useState<string[] | undefined>(data)
+  useEffect(() => {
+    setIsModalLoaderVisible(true)
+    if (data === undefined) return
+    setTimeout(() => setIsModalLoaderVisible(false), 1000)
+    setNames(data)
+  }, [data])
   return (
     <Container>
       <Title>Membres de l'équipage</Title>
       <WrapperNames>
         {isModalLoaderVisible ? <ModalLoader /> : null}
-        {/* mapper sur la data ici => data.map */}
-        {names.map((name) => (
-          <Name key={name}>{name}</Name>
-        ))}
+        {names ? names.map((name) => <Name key={name}>{name}</Name>) : null}
       </WrapperNames>
     </Container>
   )
