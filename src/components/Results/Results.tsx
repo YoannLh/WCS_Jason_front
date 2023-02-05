@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+
+import { ModalLoader } from '../ModalLoader/ModalLoader'
 
 const Container = styled.section`
   display: flex;
@@ -12,12 +15,14 @@ const Title = styled.h2`
 `
 
 const WrapperNames = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   height: 260px;
   overflow: scroll;
   margin: auto;
+  z-index: 1;
 `
 
 const Name = styled.p`
@@ -72,10 +77,12 @@ const names = [
 ]
 
 export const Results = () => {
+  const [isModalLoaderVisible, setIsModalLoaderVisible] = useState(true)
   return (
     <Container>
       <Title>Membres de l'équipage</Title>
       <WrapperNames>
+        {isModalLoaderVisible ? <ModalLoader /> : null}
         {/* mapper sur la data ici => data.map */}
         {names.map((name) => (
           <Name key={name}>{name}</Name>
