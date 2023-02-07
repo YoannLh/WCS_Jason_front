@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ModalLoader } from '../ModalLoader/ModalLoader'
+import { SailorsProps } from '../../interfaces/SailorsProps'
+import { ResultsProps } from '../../interfaces/ResultsProps'
 
 const Container = styled.section`
   display: flex;
@@ -31,25 +33,24 @@ const Name = styled.p`
   margin: 5px auto;
 `
 
-interface ResultsProps {
-  data: string[] | undefined
-}
-
 export const Results = ({ data }: ResultsProps) => {
   const [isModalLoaderVisible, setIsModalLoaderVisible] = useState(true)
-  const [names, setNames] = useState<string[] | undefined>(data)
+  const [names, setNames] = useState<SailorsProps[] | undefined>()
   useEffect(() => {
     setIsModalLoaderVisible(true)
     if (data === undefined) return
-    setTimeout(() => setIsModalLoaderVisible(false), 1000)
-    setNames(data)
+    const arr = data.sailors
+    setNames(arr)
+    setIsModalLoaderVisible(false)
   }, [data])
   return (
     <Container>
       <Title>Membres de l'équipage</Title>
       <WrapperNames>
         {isModalLoaderVisible ? <ModalLoader /> : null}
-        {names ? names.map((name) => <Name key={name}>{name}</Name>) : null}
+        {names
+          ? names.map((name) => <Name key={name._id}>{name.name}</Name>)
+          : null}
       </WrapperNames>
     </Container>
   )

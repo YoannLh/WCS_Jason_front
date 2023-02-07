@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Form } from '../Form/Form'
 import { Results } from '../Results/Results'
+import { SailorsProps } from '../../interfaces/SailorsProps'
 
 const Container = styled.main`
   display: flex;
@@ -11,10 +12,12 @@ const Container = styled.main`
 `
 
 export const Main = () => {
-  const [data, setData] = useState<string[]>()
+  const [data, setData] = useState<SailorsProps>()
   async function getData() {
     try {
-      const req = await fetch('http://localhost:3000/api/names')
+      const req = await fetch(
+        'https://gentle-reaches-58619.herokuapp.com/api/names'
+      )
         .then((response) => response.json())
         .then((data) => setData(data))
     } catch (err) {

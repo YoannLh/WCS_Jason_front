@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { FormProps } from '../../interfaces/FormProps'
+
 const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -31,10 +33,6 @@ const ErrorMessage = styled.p`
   color: red;
 `
 
-interface FormProps {
-  listeningClickForm: () => void
-}
-
 export const Form = ({ listeningClickForm }: FormProps) => {
   const [name, setName] = useState<string>('')
   const [error, setError] = useState<string>()
@@ -42,6 +40,10 @@ export const Form = ({ listeningClickForm }: FormProps) => {
     setName(e.currentTarget.value)
   }
   function isValidName(name: string) {
+    if (name.length === 0) {
+      setError('Le champ est vide')
+      return false
+    }
     if (name.length < 3) {
       setError('Ce nom est trop court')
       return false
@@ -60,21 +62,24 @@ export const Form = ({ listeningClickForm }: FormProps) => {
       return
     } else {
       try {
-        const req = fetch('http://localhost:3000/api/names', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name }),
-        })
+        const req = fetch(
+          'https://gentle-reaches-58619.herokuapp.com/api/names',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name }),
+          }
+        )
           .then((response) => response.json())
           .then((response) => console.log(JSON.stringify(response)))
+          .then(() => listeningClickForm())
         setName('')
       } catch (err) {
         console.log(err)
       }
-      listeningClickForm()
     }
   }
   return (
