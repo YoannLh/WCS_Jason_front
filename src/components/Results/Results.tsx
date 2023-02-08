@@ -51,7 +51,7 @@ export const Results = ({ data }: ResultsProps) => {
     setIsModalLoaderVisible(true)
     if (data === undefined) return
     const arr = data.sailors
-    setNames(arr)
+    setNames(arr.reverse())
     setIsModalLoaderVisible(false)
   }, [data])
   return (
