@@ -22,13 +22,15 @@ const WrapperNames = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 260px;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: auto;
   z-index: 1;
 
   @media screen and (max-width: 450px) {
     flex-direction: column;
-    flex-wrap: no-wrap;
+    flex-wrap: nowrap;
+    height: 200px;
+    overflow-y: scroll;
   }
 `
 
