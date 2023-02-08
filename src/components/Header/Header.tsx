@@ -11,15 +11,29 @@ const WrapperLogoAndTitle = styled.div`
   display: flex;
   margin: auto;
   align-items: baseline;
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const Logo = styled.img`
   height: 30px;
+
+  @media screen and (max-width: 450px) {
+    height: 30px;
+    margin: auto;
+  }
 `
 
 const Title = styled.h1`
   margin-left: 10px;
   font-size: 2.5em;
+
+  @media screen and (max-width: 450px) {
+    margin: auto;
+  }
 `
 
 export const Header = () => {

@@ -25,12 +25,21 @@ const WrapperNames = styled.div`
   overflow: scroll;
   margin: auto;
   z-index: 1;
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    flex-wrap: no-wrap;
+  }
 `
 
 const Name = styled.p`
   width: 25vw;
   text-align: center;
   margin: 5px auto;
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
 `
 
 export const Results = ({ data }: ResultsProps) => {
